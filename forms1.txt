@@ -1,0 +1,75 @@
+import { Component } from '@angular/core';
+import { AstMemoryEfficientTransformer } from '@angular/compiler';
+
+@Component({
+  selector: 'app-root',
+  template : `
+  <form action="#" (submit)="submithandler(myForm.value)" #myForm="ngForm" method="get" name="myform">
+    <label for="username">User Name : </label>
+    <input type="text" #unameInput="ngModel" [(ngModel)]="uname" name="username" required  />
+    <br/>
+    <label for="useremail">User eMail : </label>
+    <input type="email" #uemailInput="ngModel" [(ngModel)]="uemail" name="useremail" required pattern=".+@.+"/>
+    <br/>
+    <label for="userage">User Age : </label>
+    <input type="number" #uageInput="ngModel" [(ngModel)]="uage" name="userage" required min="18" max="90"  />
+    <br/>
+    <button [disabled]="myForm.invalid" type="submit">Login</button>
+  </form>
+  `,
+  styles : [`
+    label { width : 100px; display: inline-block; padding: 5px; margin: 5px}
+    input.ng-invalid.ng-touched{ border : 2px solid crimson}
+    input.ng-valid.ng-touched{ border : 2px solid darkseagreen}
+  `]
+  /*
+  template: `
+  <form action="#" method="get">
+  <label for="username">User Name</label>
+  <input id="username" #username="ngModel" name="userName" type="text" [(ngModel)]="user.name" required/>
+  <br>
+  <label for="usermail">User eMail</label>
+  <input id="usermail"  #usermail="ngModel"  name="userMail" type="text" [(ngModel)]="user.mail" required/>
+  <br>
+    <label for="userage">User Age</label>
+    <input id="userage"  #userage="ngModel" min="18" max="70"  name="userAge" type="number" [(ngModel)]="user.age" required/>
+    <br>
+    <input type="submit">
+  </form>
+  <hr>
+  <p>{{ username.valid }}</p>
+  <p>{{ usermail.valid }}</p>
+  <p>{{ userage.valid }}</p>
+  <h1>{{ user.name +' | '+ user.mail +' | '+ user.age}}</h1>
+  `,
+  styles:[`
+
+  label{
+    width : 100px;
+        display : inline-block;
+        margin : 2px;
+      }
+      form button{
+        margin-left: 104px;
+        margin-top:10px;
+      }
+      `]
+      */
+    })
+    export class AppComponent {
+      uname = '';
+      uemail = '';
+      uage = '';
+      submithandler(args){
+        // alert("user is trying to submit the form");
+        // myForm.submit();
+       // console.log(args.username, args.useremail, args.userage);
+       if(args.userage < 18){
+         alert("you are too young to apply")
+        }else if(args.userage > 90){
+          alert("you are too old to apply")
+       }else{
+         myForm.submit();
+       }
+      }
+    }
